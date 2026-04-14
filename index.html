@@ -31,15 +31,7 @@
   .detail-header { padding: 20px 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.09); text-align: left; background: rgba(230,150,170,0.07); }
   .detail-date-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; color: #f0b8c8; text-transform: uppercase; margin-bottom: 6px; }
   .detail-title { font-size: 1.05rem; font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 14px; }
-  /* 강조된 리더 뱃지 */
-  .leader-badge {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 10px 18px;
-    background: linear-gradient(135deg, rgba(240,184,200,0.2) 0%, rgba(196,168,232,0.15) 100%);
-    border: 1px solid rgba(240,184,200,0.55);
-    border-radius: 14px;
-    box-shadow: 0 0 16px rgba(240,184,200,0.18), inset 0 1px 0 rgba(255,255,255,0.1);
-  }
+  .leader-badge { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; background: linear-gradient(135deg, rgba(240,184,200,0.2) 0%, rgba(196,168,232,0.15) 100%); border: 1px solid rgba(240,184,200,0.55); border-radius: 14px; box-shadow: 0 0 16px rgba(240,184,200,0.18), inset 0 1px 0 rgba(255,255,255,0.1); }
   .leader-icon { font-size: 15px; line-height: 1; }
   .leader-info { display: flex; flex-direction: column; gap: 2px; }
   .leader-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; color: rgba(240,184,200,0.65); text-transform: uppercase; }
@@ -57,10 +49,14 @@
   .tl-body { flex: 1; text-align: left; }
   .tl-name { font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.95); margin-bottom: 3px; }
   .tl-desc { font-size: 0.8rem; color: rgba(255,255,255,0.52); line-height: 1.5; }
+  .tl-hint { font-size: 0.73rem; color: rgba(255,255,255,0.38); line-height: 1.5; margin-top: 3px; }
   .tl-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 5px; font-size: 0.75rem; color: #f0b8c8; text-decoration: none; border-bottom: 1px solid rgba(240,184,200,0.3); padding-bottom: 1px; }
   .tl-sub { margin-top: 6px; padding: 8px 12px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px solid rgba(255,255,255,0.08); }
   .tl-sub-row { font-size: 0.78rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
   .tl-notice { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; padding: 5px 10px; background: rgba(196,168,232,0.1); border: 1px solid rgba(196,168,232,0.3); border-radius: 8px; font-size: 0.75rem; color: #c4a8e8; }
+  .mini-event { margin-top: 8px; padding: 10px 14px; background: linear-gradient(135deg, rgba(245,201,122,0.08) 0%, rgba(240,184,200,0.08) 100%); border: 1px solid rgba(245,201,122,0.3); border-radius: 12px; }
+  .mini-event-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; color: rgba(245,201,122,0.7); text-transform: uppercase; margin-bottom: 4px; }
+  .mini-event-text { font-size: 0.8rem; color: rgba(255,255,255,0.75); line-height: 1.5; }
   .seat-wrap { margin-top: 10px; }
   .seat-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; color: rgba(255,255,255,0.32); text-transform: uppercase; margin-bottom: 8px; }
   .seat-tables { display: flex; flex-direction: column; gap: 10px; }
@@ -169,7 +165,12 @@
           <div class="tl-body">
             <div class="tl-name">🌸 퍼퓸 핸드크림 + 향수 만들기</div>
             <div class="tl-desc">좌석 자율 · 클래스 2시간 내 마무리<br>이동 전 화장실 이용 필수 (연극 장소 혼잡)</div>
+            <div class="tl-hint">✨ 63센터 박창숙 센터장님 합류 예정</div>
             <a class="tl-link" href="https://naver.me/5jJTk4Nb" target="_blank">📍 향수공방 위치 보기</a>
+            <div class="mini-event">
+              <div class="mini-event-label">🎉 미니 이벤트 · 향 정체 맞추기</div>
+              <div class="mini-event-text">가장 많이 맞춘 4인에게 소정의 선물을 드립니다 🎁</div>
+            </div>
           </div>
         </div>
         <div class="tl-item">
