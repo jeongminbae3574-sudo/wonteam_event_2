@@ -1,179 +1,107 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>보험서비스팀 단합대회</title>
-  <link rel="stylesheet" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-    html, body {
-      width: 100%;
-      min-height: 100%;
-      min-height: 100dvh;
-    }
-    body {
-      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      background: #0c1020;
-      background-attachment: fixed;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 52px 20px 72px;
-      position: relative;
-      overflow-x: hidden;
-    }
-    /* 배경 레이어 */
-    .bg-layer {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      background: radial-gradient(circle at 50% 110%, #1e2a3a 0%, #141a2e 50%, #0c1020 100%);
-    }
-    .bokeh-1 { position: fixed; width: 100vw; height: 100vw; max-width: 500px; max-height: 500px; background: rgba(230,150,180,0.18); border-radius: 50%; filter: blur(70px); bottom: -20vw; left: -20vw; pointer-events: none; z-index: 0; }
-    .bokeh-2 { position: fixed; width: 80vw; height: 80vw; max-width: 380px; max-height: 380px; background: rgba(160,190,120,0.15); border-radius: 50%; filter: blur(60px); top: 2%; right: -15vw; pointer-events: none; z-index: 0; }
-    .bokeh-3 { position: fixed; width: 90vw; height: 70vw; max-width: 450px; max-height: 350px; background: rgba(190,160,230,0.13); border-radius: 50%; filter: blur(75px); top: 15%; left: -5vw; pointer-events: none; z-index: 0; }
-    .spotlight { position: fixed; top: 35%; left: 50%; transform: translate(-50%,-50%); width: 200vw; height: 200vw; max-width: 900px; max-height: 900px; background: radial-gradient(circle, rgba(240,180,190,0.15) 0%, rgba(200,140,160,0.07) 28%, transparent 65%); pointer-events: none; z-index: 0; }
-    .vignette { position: fixed; inset: 0; background: radial-gradient(circle at 50% 50%, transparent 45%, rgba(0,0,0,0.6) 130%); pointer-events: none; z-index: 0; }
 
-    /* 컨텐츠 */
-    .content {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      max-width: 480px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em;
-      color: #f0b8c8; text-transform: uppercase; margin-bottom: 28px;
-    }
-    .eyebrow::before, .eyebrow::after { content: ''; display: block; width: 12px; height: 1px; background: currentColor; opacity: 0.6; }
-    .hero-title {
-      font-size: clamp(2.6rem, 10vw, 3.4rem);
-      font-weight: 900; line-height: 1.1; letter-spacing: -0.02em;
-      margin-bottom: 14px; color: #fff;
-      text-shadow: 0 2px 28px rgba(220,160,180,0.2);
-    }
-    .hero-subtitle { font-size: clamp(0.95rem, 3.5vw, 1.1rem); color: rgba(255,255,255,0.75); margin-bottom: 28px; line-height: 1.5; }
-    .date-prompt { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 20px; }
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .wrapper {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background: radial-gradient(circle at 50% 110%, #1e2a3a 0%, #141a2e 50%, #0c1020 100%);
+    color: #fff; min-height: 600px; width: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    padding: 48px 24px; position: relative; overflow: hidden; border-radius: 16px;
+  }
+  .bokeh-1 { position: absolute; width: 380px; height: 380px; background: rgba(230,150,180,0.18); border-radius: 50%; filter: blur(65px); bottom: -80px; left: -120px; pointer-events: none; }
+  .bokeh-2 { position: absolute; width: 300px; height: 300px; background: rgba(160,190,120,0.15); border-radius: 50%; filter: blur(55px); top: 5%; right: -80px; pointer-events: none; }
+  .bokeh-3 { position: absolute; width: 420px; height: 320px; background: rgba(190,160,230,0.13); border-radius: 50%; filter: blur(70px); top: 15%; left: 5%; pointer-events: none; }
+  .spotlight { position: absolute; top: 35%; left: 50%; transform: translate(-50%,-50%); width: 160%; height: 700px; background: radial-gradient(circle, rgba(240,180,190,0.16) 0%, rgba(200,140,160,0.08) 28%, transparent 65%); pointer-events: none; }
+  .vignette { position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, transparent 50%, rgba(0,0,0,0.5) 130%); pointer-events: none; border-radius: 16px; }
+  .content { position: relative; z-index: 10; width: 100%; max-width: 480px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; color: #f0b8c8; text-transform: uppercase; margin-bottom: 32px; }
+  .eyebrow::before, .eyebrow::after { content: ''; display: block; width: 12px; height: 1px; background: currentColor; opacity: 0.6; }
+  .hero-title { font-size: 3.2rem; font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; color: #fff; text-shadow: 0 2px 28px rgba(220,160,180,0.2); }
+  .hero-subtitle { font-size: 1.1rem; color: rgba(255,255,255,0.75); margin-bottom: 32px; line-height: 1.5; }
+  .date-prompt { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 24px; }
+  .date-selector { display: flex; gap: 12px; justify-content: center; width: 100%; }
+  .date-card { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 80px; height: 100px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+  .date-card:active { transform: scale(0.96); }
+  .date-card.selected { background: rgba(230,150,170,0.18); border-color: rgba(230,150,170,0.65); box-shadow: 0 0 24px rgba(230,150,170,0.22); }
+  .date-card.selected .date-num { color: #f0b8c8; }
+  .date-day { font-size: 0.75rem; font-weight: 500; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; margin-bottom: 4px; }
+  .date-num { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: rgba(255,255,255,0.9); }
+  .detail-panel { width: 100%; margin-top: 32px; background: rgba(255,255,255,0.06); border: 1px solid rgba(230,150,170,0.28); border-radius: 20px; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); overflow: hidden; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; pointer-events: none; max-height: 0; }
+  .detail-panel.visible { opacity: 1; transform: translateY(0); pointer-events: auto; max-height: 9999px; }
+  .detail-header { padding: 20px 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.09); text-align: left; background: rgba(230,150,170,0.07); }
+  .detail-date-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; color: #f0b8c8; text-transform: uppercase; margin-bottom: 6px; }
+  .detail-title { font-size: 1.05rem; font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 14px; }
+  /* 강조된 리더 뱃지 */
+  .leader-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 18px;
+    background: linear-gradient(135deg, rgba(240,184,200,0.2) 0%, rgba(196,168,232,0.15) 100%);
+    border: 1px solid rgba(240,184,200,0.55);
+    border-radius: 14px;
+    box-shadow: 0 0 16px rgba(240,184,200,0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .leader-icon { font-size: 15px; line-height: 1; }
+  .leader-info { display: flex; flex-direction: column; gap: 2px; }
+  .leader-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; color: rgba(240,184,200,0.65); text-transform: uppercase; }
+  .leader-name { font-size: 1rem; font-weight: 700; color: #f0b8c8; letter-spacing: -0.01em; }
+  .timeline { padding: 16px 24px 20px; display: flex; flex-direction: column; }
+  .tl-item { display: flex; align-items: flex-start; gap: 14px; padding: 10px 0; position: relative; }
+  .tl-item:not(:last-child)::after { content: ''; position: absolute; left: 33px; top: 36px; bottom: -10px; width: 1px; background: rgba(255,255,255,0.1); }
+  .tl-left { flex-shrink: 0; width: 48px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .tl-time { font-size: 0.7rem; font-weight: 600; color: rgba(255,255,255,0.42); letter-spacing: 0.03em; white-space: nowrap; }
+  .tl-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; position: relative; z-index: 1; }
+  .tl-dot.sakura   { background: #f0b8c8; box-shadow: 0 0 0 3px rgba(240,184,200,0.2); }
+  .tl-dot.sky      { background: #90cef4; box-shadow: 0 0 0 3px rgba(144,206,244,0.2); }
+  .tl-dot.green    { background: #96d4a0; box-shadow: 0 0 0 3px rgba(150,212,160,0.2); }
+  .tl-dot.lavender { background: #c4a8e8; box-shadow: 0 0 0 3px rgba(196,168,232,0.2); }
+  .tl-body { flex: 1; text-align: left; }
+  .tl-name { font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.95); margin-bottom: 3px; }
+  .tl-desc { font-size: 0.8rem; color: rgba(255,255,255,0.52); line-height: 1.5; }
+  .tl-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 5px; font-size: 0.75rem; color: #f0b8c8; text-decoration: none; border-bottom: 1px solid rgba(240,184,200,0.3); padding-bottom: 1px; }
+  .tl-sub { margin-top: 6px; padding: 8px 12px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px solid rgba(255,255,255,0.08); }
+  .tl-sub-row { font-size: 0.78rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .tl-notice { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; padding: 5px 10px; background: rgba(196,168,232,0.1); border: 1px solid rgba(196,168,232,0.3); border-radius: 8px; font-size: 0.75rem; color: #c4a8e8; }
+  .seat-wrap { margin-top: 10px; }
+  .seat-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; color: rgba(255,255,255,0.32); text-transform: uppercase; margin-bottom: 8px; }
+  .seat-tables { display: flex; flex-direction: column; gap: 10px; }
+  .seat-table-block { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 10px 12px; }
+  .seat-table-title { font-size: 0.7rem; font-weight: 600; color: rgba(144,206,244,0.8); letter-spacing: 0.06em; margin-bottom: 8px; }
+  .seat-name-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .seat-name { padding: 5px 10px; background: rgba(144,206,244,0.12); border: 1px solid rgba(144,206,244,0.3); border-radius: 8px; font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.88); }
+  .theater-wrap { margin-top: 8px; padding: 10px 12px; background: rgba(255,255,255,0.04); border-radius: 10px; border: 1px dashed rgba(255,255,255,0.1); text-align: center; }
+  .theater-notice { font-size: 0.8rem; color: rgba(255,255,255,0.38); }
+  .coming-soon-wrap { width: 100%; margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; pointer-events: none; max-height: 0; overflow: hidden; }
+  .coming-soon-wrap.visible { opacity: 1; transform: translateY(0); pointer-events: auto; max-height: 200px; }
+  .coming-label { font-size: 0.8rem; color: rgba(255,255,255,0.42); letter-spacing: 0.1em; }
+  .coming-tag { padding: 8px 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.13); border-radius: 999px; font-size: 0.85rem; color: rgba(255,255,255,0.42); }
+</style>
 
-    .date-selector { display: flex; gap: 10px; justify-content: center; width: 100%; }
-    .date-card {
-      flex: 1;
-      max-width: 100px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      height: clamp(88px, 22vw, 108px);
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 16px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      cursor: pointer; transition: all 0.3s ease;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-      -webkit-tap-highlight-color: transparent;
-    }
-    .date-card:active { transform: scale(0.95); }
-    .date-card.selected { background: rgba(230,150,170,0.18); border-color: rgba(230,150,170,0.65); box-shadow: 0 0 24px rgba(230,150,170,0.22); }
-    .date-card.selected .date-num { color: #f0b8c8; }
-    .date-day { font-size: 0.72rem; font-weight: 500; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; margin-bottom: 4px; }
-    .date-num { font-size: clamp(1.1rem, 4vw, 1.3rem); font-weight: 700; letter-spacing: -0.02em; color: rgba(255,255,255,0.9); }
+<link rel="stylesheet" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 
-    /* 상세 패널 */
-    .detail-panel {
-      width: 100%; margin-top: 28px;
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(230,150,170,0.28);
-      border-radius: 20px; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-      overflow: hidden; opacity: 0; transform: translateY(20px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      pointer-events: none; max-height: 0;
-    }
-    .detail-panel.visible { opacity: 1; transform: translateY(0); pointer-events: auto; max-height: 9999px; }
-    .detail-header { padding: 18px 20px 14px; border-bottom: 1px solid rgba(255,255,255,0.09); text-align: left; background: rgba(230,150,170,0.07); }
-    .detail-date-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; color: #f0b8c8; text-transform: uppercase; margin-bottom: 5px; }
-    .detail-title { font-size: 1rem; font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 10px; }
-    .leader-badge { display: inline-flex; align-items: center; gap: 7px; padding: 5px 13px; background: rgba(240,184,200,0.1); border: 1px solid rgba(240,184,200,0.32); border-radius: 999px; }
-    .leader-dot { width: 6px; height: 6px; border-radius: 50%; background: #f0b8c8; box-shadow: 0 0 5px rgba(240,184,200,0.85); flex-shrink: 0; }
-    .leader-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; color: rgba(240,184,200,0.65); text-transform: uppercase; }
-    .leader-name { font-size: 0.8rem; font-weight: 700; color: #f0b8c8; }
-
-    /* 타임라인 */
-    .timeline { padding: 14px 20px 18px; display: flex; flex-direction: column; }
-    .tl-item { display: flex; align-items: flex-start; gap: 12px; padding: 9px 0; position: relative; }
-    .tl-item:not(:last-child)::after { content: ''; position: absolute; left: 30px; top: 34px; bottom: -9px; width: 1px; background: rgba(255,255,255,0.1); }
-    .tl-left { flex-shrink: 0; width: 44px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-    .tl-time { font-size: 0.67rem; font-weight: 600; color: rgba(255,255,255,0.42); letter-spacing: 0.02em; white-space: nowrap; }
-    .tl-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; position: relative; z-index: 1; }
-    .tl-dot.sakura   { background: #f0b8c8; box-shadow: 0 0 0 3px rgba(240,184,200,0.2); }
-    .tl-dot.sky      { background: #90cef4; box-shadow: 0 0 0 3px rgba(144,206,244,0.2); }
-    .tl-dot.green    { background: #96d4a0; box-shadow: 0 0 0 3px rgba(150,212,160,0.2); }
-    .tl-dot.lavender { background: #c4a8e8; box-shadow: 0 0 0 3px rgba(196,168,232,0.2); }
-    .tl-body { flex: 1; text-align: left; }
-    .tl-name { font-size: 0.88rem; font-weight: 600; color: rgba(255,255,255,0.95); margin-bottom: 2px; }
-    .tl-desc { font-size: 0.78rem; color: rgba(255,255,255,0.52); line-height: 1.5; }
-    .tl-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 5px; font-size: 0.74rem; color: #f0b8c8; text-decoration: none; border-bottom: 1px solid rgba(240,184,200,0.3); padding-bottom: 1px; }
-    .tl-sub { margin-top: 6px; padding: 8px 11px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px solid rgba(255,255,255,0.08); }
-    .tl-sub-row { font-size: 0.76rem; color: rgba(255,255,255,0.5); line-height: 1.65; }
-    .tl-notice { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; padding: 5px 10px; background: rgba(196,168,232,0.1); border: 1px solid rgba(196,168,232,0.3); border-radius: 8px; font-size: 0.73rem; color: #c4a8e8; }
-
-    /* 자리배치 */
-    .seat-wrap { margin-top: 10px; }
-    .seat-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; color: rgba(255,255,255,0.32); text-transform: uppercase; margin-bottom: 8px; }
-    .seat-tables { display: flex; flex-direction: column; gap: 7px; }
-    .seat-table-row { display: flex; align-items: center; gap: 8px; }
-    .seat-table-name { font-size: 0.68rem; color: rgba(255,255,255,0.38); width: 48px; flex-shrink: 0; }
-    .seat-table { display: flex; gap: 5px; }
-    .seat { width: clamp(28px, 8vw, 34px); height: clamp(28px, 8vw, 34px); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 0.66rem; font-weight: 600; background: rgba(144,206,244,0.16); border: 1px solid rgba(144,206,244,0.38); color: #90cef4; }
-    .seat.empty { background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.1); color: rgba(255,255,255,0.2); }
-
-    /* 연극 */
-    .theater-wrap { margin-top: 8px; padding: 10px 12px; background: rgba(255,255,255,0.04); border-radius: 10px; border: 1px dashed rgba(255,255,255,0.1); text-align: center; }
-    .theater-notice { font-size: 0.78rem; color: rgba(255,255,255,0.38); }
-
-    /* 준비중 */
-    .coming-soon-wrap { width: 100%; margin-top: 28px; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; pointer-events: none; max-height: 0; overflow: hidden; }
-    .coming-soon-wrap.visible { opacity: 1; transform: translateY(0); pointer-events: auto; max-height: 200px; }
-    .coming-label { font-size: 0.78rem; color: rgba(255,255,255,0.42); letter-spacing: 0.1em; }
-    .coming-tag { padding: 8px 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.13); border-radius: 999px; font-size: 0.83rem; color: rgba(255,255,255,0.42); }
-  </style>
-</head>
-<body>
-  <div class="bg-layer"></div>
-  <div class="bokeh-1"></div>
-  <div class="bokeh-2"></div>
-  <div class="bokeh-3"></div>
-  <div class="spotlight"></div>
-  <div class="vignette"></div>
-
+<div class="wrapper">
+  <div class="bokeh-1"></div><div class="bokeh-2"></div><div class="bokeh-3"></div>
+  <div class="spotlight"></div><div class="vignette"></div>
   <div class="content">
     <div class="eyebrow">상세내용</div>
     <h1 class="hero-title">보험서비스팀<br>단합대회</h1>
     <p class="hero-subtitle">이제 곧, 원팀으로 만나는 시간입니다.</p>
     <p class="date-prompt">날짜를 선택해 주세요<br>한 번 클릭하면 모든 정보를 확인할 수 있어요</p>
-
     <div class="date-selector">
-      <div class="date-card" id="card-421" onclick="selectDate('421')">
-        <div class="date-day">화</div><div class="date-num">4.21</div>
-      </div>
-      <div class="date-card" id="card-422" onclick="selectDate('422')">
-        <div class="date-day">수</div><div class="date-num">4.22</div>
-      </div>
-      <div class="date-card" id="card-423" onclick="selectDate('423')">
-        <div class="date-day">목</div><div class="date-num">4.23</div>
-      </div>
+      <div class="date-card" id="card-421" onclick="selectDate('421')"><div class="date-day">화</div><div class="date-num">4.21</div></div>
+      <div class="date-card" id="card-422" onclick="selectDate('422')"><div class="date-day">수</div><div class="date-num">4.22</div></div>
+      <div class="date-card" id="card-423" onclick="selectDate('423')"><div class="date-day">목</div><div class="date-num">4.23</div></div>
     </div>
 
-    <!-- 4.21 -->
     <div class="detail-panel" id="panel-421">
       <div class="detail-header">
         <div class="detail-date-label">4월 21일 화요일</div>
         <div class="detail-title">오늘 하루, 이렇게 채워집니다.</div>
         <div class="leader-badge">
-          <div class="leader-dot"></div>
-          <span class="leader-label">리더</span>
-          <span class="leader-name">미정</span>
+          <div class="leader-icon">👑</div>
+          <div class="leader-info">
+            <div class="leader-label">오늘의 리더</div>
+            <div class="leader-name">신혜원</div>
+          </div>
         </div>
       </div>
       <div class="timeline">
@@ -182,7 +110,7 @@
           <div class="tl-body">
             <div class="tl-name">혜화 마로니에공원 집결</div>
             <div class="tl-desc">아르코 미술관 앞 집합</div>
-            <a class="tl-link" href="https://naver.me/xY4sisl6">📍 아르코 미술관 위치 보기</a>
+            <a class="tl-link" href="https://naver.me/xY4sisl6" target="_blank">📍 아르코 미술관 위치 보기</a>
           </div>
         </div>
         <div class="tl-item">
@@ -201,21 +129,27 @@
           <div class="tl-body">
             <div class="tl-name">낙산공원 중앙광장 출발 · 식사 장소 이동</div>
             <div class="tl-desc">도보 약 20분 소요</div>
-            <a class="tl-link" href="https://naver.me/5CFw4YMq">🍽 죠죠 대학로점 위치 보기</a>
+            <a class="tl-link" href="https://naver.me/5CFw4YMq" target="_blank">🍽 죠죠 대학로점 위치 보기</a>
             <div class="seat-wrap">
-              <div class="seat-label">식사 자리배치 (4 · 4 · 3)</div>
+              <div class="seat-label">식사 자리배치</div>
               <div class="seat-tables">
-                <div class="seat-table-row">
-                  <div class="seat-table-name">테이블 1</div>
-                  <div class="seat-table"><div class="seat">1</div><div class="seat">2</div><div class="seat">3</div><div class="seat">4</div></div>
+                <div class="seat-table-block">
+                  <div class="seat-table-title">테이블 1</div>
+                  <div class="seat-name-row">
+                    <div class="seat-name">김락규</div><div class="seat-name">구송미</div><div class="seat-name">허정민</div><div class="seat-name">김민주</div>
+                  </div>
                 </div>
-                <div class="seat-table-row">
-                  <div class="seat-table-name">테이블 2</div>
-                  <div class="seat-table"><div class="seat">5</div><div class="seat">6</div><div class="seat">7</div><div class="seat">8</div></div>
+                <div class="seat-table-block">
+                  <div class="seat-table-title">테이블 2</div>
+                  <div class="seat-name-row">
+                    <div class="seat-name">이영진</div><div class="seat-name">장유선</div><div class="seat-name">김형종</div><div class="seat-name">이웅섭</div>
+                  </div>
                 </div>
-                <div class="seat-table-row">
-                  <div class="seat-table-name">테이블 3</div>
-                  <div class="seat-table"><div class="seat">9</div><div class="seat">10</div><div class="seat">11</div><div class="seat empty">—</div></div>
+                <div class="seat-table-block">
+                  <div class="seat-table-title">테이블 3</div>
+                  <div class="seat-name-row">
+                    <div class="seat-name">정경희</div><div class="seat-name">조아라</div><div class="seat-name">신혜원</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -226,8 +160,8 @@
           <div class="tl-body">
             <div class="tl-name">☕ (여유 시) 식사 후 카페</div>
             <div class="tl-desc">추천 카페 · 혜화</div>
-            <a class="tl-link" href="https://naver.me/IgJGRYrQ">📍 추천 카페 위치 보기</a>
-            <br><span style="font-size:0.73rem;color:rgba(255,255,255,0.38);">향수공방까지 도보 5분 이내</span>
+            <a class="tl-link" href="https://naver.me/IgJGRYrQ" target="_blank">📍 추천 카페 위치 보기</a>
+            <br><span style="font-size:0.75rem;color:rgba(255,255,255,0.38);">향수공방까지 도보 5분 이내</span>
           </div>
         </div>
         <div class="tl-item">
@@ -235,7 +169,7 @@
           <div class="tl-body">
             <div class="tl-name">🌸 퍼퓸 핸드크림 + 향수 만들기</div>
             <div class="tl-desc">좌석 자율 · 클래스 2시간 내 마무리<br>이동 전 화장실 이용 필수 (연극 장소 혼잡)</div>
-            <a class="tl-link" href="https://naver.me/5jJTk4Nb">📍 향수공방 위치 보기</a>
+            <a class="tl-link" href="https://naver.me/5jJTk4Nb" target="_blank">📍 향수공방 위치 보기</a>
           </div>
         </div>
         <div class="tl-item">
@@ -244,61 +178,53 @@
             <div class="tl-name">연극 장소로 이동</div>
             <div class="tl-desc">향수공방에서 도보 약 10분 소요</div>
             <div class="tl-notice">🎟 현장 발권 필요</div>
-            <a class="tl-link" href="https://naver.me/x6xd4AxE">📍 연극 장소 위치 보기</a>
+            <a class="tl-link" href="https://naver.me/x6xd4AxE" target="_blank">📍 연극 장소 위치 보기</a>
           </div>
         </div>
         <div class="tl-item">
           <div class="tl-left"><div class="tl-time">16:00</div><div class="tl-dot sakura"></div></div>
           <div class="tl-body">
             <div class="tl-name">🎭 연극 관람</div>
-            <div class="theater-wrap">
-              <div class="theater-notice">🪑 좌석 배치 추후 공지 예정</div>
-            </div>
+            <div class="theater-wrap"><div class="theater-notice">🪑 좌석 배치 추후 공지 예정</div></div>
           </div>
         </div>
         <div class="tl-item">
           <div class="tl-left"><div class="tl-time">17:50</div><div class="tl-dot sakura"></div></div>
-          <div class="tl-body">
-            <div class="tl-name">연극 종료 · 마무리 해산</div>
-          </div>
+          <div class="tl-body"><div class="tl-name">연극 종료 · 마무리 해산</div></div>
         </div>
       </div>
     </div>
 
-    <!-- 4.22 -->
     <div class="coming-soon-wrap" id="panel-422">
       <div class="coming-label">4월 22일 수요일</div>
       <div class="coming-tag">상세 일정 준비 중입니다</div>
     </div>
-
-    <!-- 4.23 -->
     <div class="coming-soon-wrap" id="panel-423">
       <div class="coming-label">4월 23일 목요일</div>
       <div class="coming-tag">상세 일정 준비 중입니다</div>
     </div>
   </div>
+</div>
 
-  <script>
-    var current = null;
-    function selectDate(id) {
-      ['421','422','423'].forEach(function(d) {
-        if (d !== id) {
-          document.getElementById('card-' + d).classList.remove('selected');
-          document.getElementById('panel-' + d).classList.remove('visible');
-        }
-      });
-      var card = document.getElementById('card-' + id);
-      var panel = document.getElementById('panel-' + id);
-      if (current === id) {
-        card.classList.remove('selected');
-        panel.classList.remove('visible');
-        current = null;
-      } else {
-        card.classList.add('selected');
-        setTimeout(function() { panel.classList.add('visible'); }, 50);
-        current = id;
-      }
+<script>
+var current = null;
+function selectDate(id) {
+  ['421','422','423'].forEach(function(d) {
+    if (d !== id) {
+      document.getElementById('card-' + d).classList.remove('selected');
+      document.getElementById('panel-' + d).classList.remove('visible');
     }
-  </script>
-</body>
-</html>
+  });
+  var card = document.getElementById('card-' + id);
+  var panel = document.getElementById('panel-' + id);
+  if (current === id) {
+    card.classList.remove('selected');
+    panel.classList.remove('visible');
+    current = null;
+  } else {
+    card.classList.add('selected');
+    setTimeout(function() { panel.classList.add('visible'); }, 50);
+    current = id;
+  }
+}
+</script>
